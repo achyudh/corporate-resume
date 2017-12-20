@@ -1,0 +1,334 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Don't like 10pt? Try 11pt or 12pt
+\documentclass[10pt]{article}
+
+% The automated optical recognition software used to digitize resume
+% information works best with fonts that do not have serifs. This
+% command uses a sans serif font throughout. Uncomment both lines (or at
+% least the second) to restore a Roman font (i.e., a font with serifs).
+%\usepackage{times}
+%\renewcommand{\familydefault}{\sfdefault}
+
+% This is a helpful package that puts math inside length specifications
+\usepackage{calc}
+\usepackage{comment}
+
+% Simpler bibsection for CV sections
+% (thanks to natbib for inspiration)
+\makeatletter
+\newlength{\bibhang}
+\usepackage[T1]{fontenc}
+\setlength{\bibhang}{1em} %1em}
+\newlength{\bibsep}
+ {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
+\newenvironment{bibsection}%
+        {\begin{enumerate}{}{%
+%        {\begin{list}{}{%
+       \setlength{\leftmargin}{\bibhang}%
+       \setlength{\itemindent}{-\leftmargin}%
+       \setlength{\itemsep}{\bibsep}%
+       \setlength{\parsep}{\z@}%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{enumerate}\vspace{-.6\baselineskip}}
+%        {\end{list}\vspace{-.6\baselineskip}}
+\makeatother
+
+% Layout: Puts the section titles on left side of page
+\reversemarginpar
+
+%
+%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+%
+% The next \usepackage line changes the layout for CV style section
+% headings as marginal notes. It also sets up the paper size as either
+% letter or A4. By default, letter was used. If A4 paper is desired,
+% comment out the letterpaper lines and uncomment the a4paper lines.
+%
+% As you can see, the margin widths and section title widths can be
+% easily adjusted.
+%
+% ALSO: Notice that the includefoot option can be commented OUT in order
+% to put the PAGE NUMBER *IN* the bottom margin. This will make the
+% effective text area larger.
+%
+% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
+% see the note about the +LP and -LP lines below. Comment out the +LP
+% and uncomment the -LP.
+%
+% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
+% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
+% below.
+%
+
+% Use these lines for A4-sized paper
+\usepackage[paper=a4paper,
+            %includefoot, % Uncomment to put page number above margin
+            marginparwidth=30mm,    % Length of section titles
+            marginparsep=1.5mm,       % Space between titles and text
+            margin=15mm,              % 25mm margins
+            includemp]{geometry}
+
+%% More layout: Get rid of indenting throughout entire document
+\setlength{\parindent}{0in}
+
+\usepackage[shortlabels]{enumitem}
+
+%% Reference the last page in the page number
+%
+% NOTE: comment the +LP line and uncomment the -LP line to have page
+%       numbers without the ``of ##'' last page reference)
+%
+% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
+%       numbers (make sure includefoot is commented out above)
+%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\pagestyle{empty}      % Uncomment this to get rid of page numbers
+\fancyhf{}\renewcommand{\headrulewidth}{0pt}
+\fancyfootoffset{\marginparsep+\marginparwidth}
+\newlength{\footpageshift}
+\setlength{\footpageshift}
+          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
+\lfoot{\hspace{\footpageshift}%
+       \parbox{4in}{\, \hfill %
+                    \arabic{page} of \protect\pageref*{LastPage} % +LP
+%                    \arabic{page}                               % -LP
+                    \hfill \,}}
+
+% Finally, give us PDF bookmarks
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The title (name) with a horizontal rule under it
+% (optional argument typesets an object right-justified across from name
+%  as well)
+%
+% Usage: \makeheading{name}
+%        OR
+%        \makeheading[right_object]{name}
+%
+% Place at top of document. It should be the first thing.
+% If ``right_object'' is provided in the square-braced optional
+% argument, it will be right justified on the same line as ``name'' at
+% the top of the CV. For example:
+%
+%       \makeheading[\emph{Curriculum vitae}]{Your Name}
+%
+% will put an emphasized ``Curriculum vitae'' at the top of the document
+% as a title. Likewise, a picture could be included:
+%
+%   \makeheading[\includegraphics[height=1.5in]{my_picutre}]{Your Name}
+%
+% the picture will be flush right across from the name.
+\newcommand{\makeheading}[2][]%
+        {\hspace*{-\marginparsep minus \marginparwidth}%
+         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
+             {\LARGE \bfseries #2 \hfill #1}\\[-0.5\baselineskip]%
+                 \rule{\columnwidth}{1pt}%
+         \end{minipage}}
+
+% The section headings
+%
+% Usage: \section{section name}
+\renewcommand{\section}[1]{\pagebreak[3]%
+    \hyphenpenalty=10000%
+    \vspace{1.3\baselineskip}%
+    \phantomsection\addcontentsline{toc}{section}{#1}%
+    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\raggedright #1}}}%
+    \vspace{-\baselineskip}\par}
+
+% An itemize-style list with lots of space between items
+\newenvironment{outerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1,leftmargin=*]}{\end{itemize}%
+         \vspace{-.6\baselineskip}}
+
+% An environment IDENTICAL to outerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{lonelist}[1][\enskip\textbullet]%
+        {\begin{list}{#1}{%
+        \setlength{\partopsep}{0pt}%
+        \setlength{\topsep}{0pt}}}
+        {\end{list}\vspace{-.6\baselineskip}}
+
+% An itemize-style list with little space between items
+\newenvironment{innerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
+        {\end{itemize}}
+
+% An environment IDENTICAL to innerlist that has better pre-list spacing
+% when used as the first thing in a \section
+\newenvironment{loneinnerlist}[1][\enskip\textbullet]%
+        {\begin{itemize}[#1,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
+        {\end{itemize}\vspace{-.6\baselineskip}}
+
+% To add some paragraph space between lines.
+% This also tells LaTeX to preferably break a page on one of these gaps
+% if there is a needed pagebreak nearby.
+\newcommand{\blankline}{\quad\pagebreak[3]}
+\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
+
+% Uses hyperref to link DOI
+\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
+\newcommand\doi[1]{doi:\doilink{#1}}
+
+% For \url{SOME_URL}, links SOME_URL to the url SOME_URL
+\providecommand*\url[1]{\href{#1}{#1}}
+% Same as above, but pretty-prints SOME_URL in teletype fixed-width font
+\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
+
+% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
+\providecommand*\email[1]{\href{mailto:#1}{#1}}
+% Same as above, but pretty-prints ADDRESS in teletype fixed-width font
+%\renewcommand*\email[1]{\href{mailto:#1}{\texttt{#1}}}
+
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    \TeX}}
+\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    \TeX}}
+\providecommand\Matlab{\textsc{Matlab}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+{\huge \scshape Achyudh Ram} 
+\vspace{5pt}
+\hrule
+\vspace{5pt}
+\href{http://www.achyudh.xyz}{www.achyudh.xyz} | 
+\href{https://github.com/achyudhk}{github.com/achyudhk} | \email{achyudhk@gmail.com} | +91-98408-11140
+\newlength{\rcollength}\setlength{\rcollength}{1.4in}
+
+% NOTE: Mind where the & separators and \\ breaks are in the following
+%       table.
+%
+% ALSO: \rcollength is the width of the right column of the table
+%       (adjust it to your liking; default is 1.85in).
+%
+%
+
+\section{Education}
+
+\href{http://www.bits-pilani.ac.in}{\textbf{Birla Institute of Technology \& Science}},
+Pilani
+\begin{outerlist}
+\item[] \textbf{B.E. (Hons.), Computer Science}, \emph{Expected:} August 2018
+        \begin{innerlist}
+        \item \emph{GPA: 9.66/10.0 and Major GPA: 9.73/10.0}
+        \end{innerlist}
+        
+\item[] \textbf{M.Sc. (Hons.), Economics}, \emph{Expected:} August 2018
+        \begin{innerlist}
+        \item \emph{Major GPA: 10.0/10.0}
+        \end{innerlist}
+\end{outerlist}
+   
+    
+\section{Work Experience}
+
+\textbf{Software Developer Intern, Intuit Inc.} \hfill \emph{May '17 -- Jul '17}
+\begin{innerlist}
+    \item Developed a data engine with parallel query evaluation for layout-based database retrieval and a reports engine to provide performance insights for businesses
+    \item Won HackAttack 2017 by building \textit{Foresight}, an Android app that uses object detection and realtime databases to help the differently-abled navigate better
+\end{innerlist}
+    
+\section{Research Experience}
+
+\textbf{Visiting Scholar, \href{https://uwaterloo.ca/}{University of Waterloo}} \hfill \emph{Jan '18 -- May '18}
+\begin{innerlist}
+    \item Worked with \href{https://cs.uwaterloo.ca/~m2nagapp/}{Prof. Mei Nagappan} on the empirical modeling of sentiments in GitHub Pull Request discussions
+\end{innerlist}
+
+\halfblankline
+
+\textbf{Visiting Student, \href{https://www.tudelft.nl/}{Delft University of Technology (TU Delft)}} \hfill \emph{Aug '17 -- Dec '17}
+\begin{innerlist}
+    \item Worked with \href{https://sback.it/}{Prof. Alberto Bacchelli} on assessing the reviewability of code changes and automating the evaluation of GitHub Pull Requests
+\end{innerlist}
+
+\section{Teaching Experience}
+\textbf{Teaching Assistant, BITS Pilani} \hfill \emph{Jan '17 -- May '17} 
+\begin{innerlist}
+\item BITS F312 - Neural Networks \& Fuzzy Logic 
+\item CS F211 - Data Structures \& Algorithms
+\end{innerlist}
+
+\section{Projects}
+
+\textbf{Detecting inconsistencies between Python code and comments} \hfill \emph{Sep '17 -- 
+Nov '17}
+Advisers: \href{https://sback.it/}{Dr. A. Bacchelli}, \href{https://www.lucapascarella.com}{L. Pascarella} \hfill GitHub: \href{https://github.com/achyudhk/PyFunc-Signature-Parser}{achyudhk/PyFunc-Signature-Parser}
+
+\halfblankline
+
+\textbf{Analysis framework for decoding online developer communities} \hfill \emph{Dec '15 -- 
+May '17}
+Adviser: \href{https://prasadtalasila.wordpress.com/}{Prasad Talasila} \hfill GitHub: \href{https://github.com/achyudhk/Mailing-List-Network-Analyzer}{achyudhk/Mailing-List-Network-Analyzer}
+
+\halfblankline
+
+\textbf{Fitness-aware brokering of hosted containerized environments} \hfill \emph{Jan '17 -- May '17}
+Adviser: \href{https://scholar.google.co.in/citations?user=8UNP6BIAAAAJ}{Dr. Santonu Sarkar} \hfill GitHub: \href{https://github.com/achyudhk/Fitness-Aware-Container-Brokering}{achyudhk/Fitness-Aware-Container-Brokering}
+
+\halfblankline
+
+\textbf{Novel feature selection using Fuzzy C-Means clustering} \hfill \emph{Feb '17 -- Apr '17}\\
+Adviser: \href{http://www.bits-pilani.ac.in/goa/rkroul/Profile}{Dr. Rajendra Roul} \hfill GitHub: \href{https://github.com/achyudhk/FCM-Feature-Selection}{achyudhk/FCM-Feature-Selection}
+
+\halfblankline
+
+\textbf{Video translation of American Sign Language gestures} \hfill \emph{Nov '16 -- Dec '16} \\
+Machine Learning Course Project \hfill GitHub: \href{https://github.com/achyudhk/Sign-Language-Recognition}{achyudhk/Sign-Language-Recognition}
+
+\halfblankline
+
+\textbf{Identifying the trends in Indian Legislative issues using NLP} \hfill \emph{Aug '16 -- Dec '16}
+Adviser: \href{http://universe.bits-pilani.ac.in/goa/anoopk/Profile}{Dr. Anoop Kumar} \hfill GitHub: \href{https://github.com/achyudhk/Parliamentary-Debate-NLP}{achyudhk/Parliamentary-Debate-NLP}
+
+\halfblankline
+
+\textbf{Miscellaneous Projects}
+\begin{innerlist}
+\item Feed-forward Neural Network library using computational gate approach supporting multiple optimizers, common activation and loss functions
+\item Implementation of state of the art Deep Learning papers on Google SVHN and MNIST datasets 
+\item Implementation of machine learning algorithms like Support Vector Machines, Principal Component Analysis, K-means Clustering, Fuzzy C-means Clustering in Python
+\end{innerlist}
+
+
+\section{Skill Set}
+\textbf{Languages}
+\begin{innerlist}
+    \item[] C, C++, Python, Java, JavaScript, BASH, SQL, HTML, CSS
+\end{innerlist}
+
+\halfblankline
+
+\textbf{Frameworks}
+\begin{innerlist}
+    \item[] Amazon Web Services, Google Cloud Platform, Firebase, Android Dev, Docker,  Scikit-Learn, Matplotlib, NLTK, Keras, NetworkX, Flask, Scikit-Image, Chart.js 
+\end{innerlist}
+
+\section{Talks}
+
+\textbf{Google Developer Group, Goa}
+\begin{innerlist}
+\item Leveraging the power of Virtualization, Docker and the Cloud \hfill \emph{Apr '17}
+\end{innerlist}
+
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% End Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
