@@ -66,7 +66,7 @@
 \usepackage[paper=a4paper,
             %includefoot, % Uncomment to put page number above margin
             marginparwidth=30mm,    % Length of section titles
-            marginparsep=1.5mm,       % Space between titles and text
+            marginparsep=1mm,       % Space between titles and text
             margin=15mm,              % 25mm margins
             includemp]{geometry}
 
@@ -146,6 +146,9 @@
     \phantomsection\addcontentsline{toc}{section}{#1}%
     \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\raggedright #1}}}%
     \vspace{-\baselineskip}\par}
+    
+\newcommand{\CS}{C\nolinebreak\hspace{-.05em}\raisebox{.6ex}{\scriptsize\bf \#}}
+
 
 % An itemize-style list with lots of space between items
 \newenvironment{outerlist}[1][\enskip\textbullet]%
@@ -208,7 +211,7 @@
 \vspace{5pt}
 \hrule
 \vspace{5pt}
-\href{http://www.achyudh.xyz}{www.achyudh.xyz} | 
+\href{http://achyudh.xyz}{http://achyudh.xyz} | 
 \href{https://github.com/achyudhk}{github.com/achyudhk} | \email{arkeshav@uwaterloo.ca} | +1 (226) 898-2242
 \newlength{\rcollength}\setlength{\rcollength}{1.4in}
 
@@ -222,17 +225,18 @@
 
 \section{Education}
 
-\href{https://uwaterloo.ca/}{\textbf{University of Waterloo}}, Ontario, Canada
+\textbf{University of Waterloo}, Ontario, Canada
 \begin{outerlist}
 \item[] \textbf{M.Math. (Thesis), Computer Science}, \emph{Expected:} August 2020
         \begin{innerlist}
-		\item Affiliated to the Data Systems Group and the Software Architecture Group
+		\item Affiliated to the Data Systems Group and the Software Analytics Group
+        \item \emph{GPA: 3.76/4.0}
         \end{innerlist}
 \end{outerlist}
 
 \halfblankline
 
-\href{http://www.bits-pilani.ac.in}{\textbf{Birla Institute of Technology \& Science}}, Pilani, India
+\textbf{Birla Institute of Technology \& Science}, Pilani, India
 \begin{outerlist}
 \item[] \textbf{B.E. (Hons.), Computer Science}, Graduated with \emph{Distinction}
         \begin{innerlist}
@@ -256,24 +260,31 @@
 
 \halfblankline
 
-\textbf{Research Intern, University of Waterloo} \hfill \emph{Jan '18 -- May '18}
-\begin{innerlist}
-    \item Worked with \href{https://cs.uwaterloo.ca/~m2nagapp/}{Prof. Mei Nagappan} on the empirical modeling of sentiments in GitHub Pull Request discussions as a part of the \href{https://cs.uwaterloo.ca/~jhoey/research/themis.cog/index.php}{THEMIS.COG project}
-\end{innerlist}
-
-\halfblankline
-
-\textbf{Research Intern, \href{https://www.tudelft.nl/}{TU Delft}} \hfill \emph{Aug '17 -- Dec '17}
-\begin{innerlist}
-    \item Worked with \href{https://sback.it/}{Prof. Alberto Bacchelli} on assessing the reviewability of code changes and automating the evaluation of GitHub Pull Requests
-\end{innerlist}
-
-\halfblankline
 
 \textbf{Software Engineering Intern, Intuit} \hfill \emph{May '17 -- Jul '17}
 \begin{innerlist}
-    \item Developed a data processing layer with parallel query evaluation for layout-based database retrieval and a report generation layer to provide performance insights for businesses
-    \item Won HackAttack 2017 by building \textit{Foresight}, an Android app that uses object detection and realtime databases to help the differently-abled navigate better
+    \item Built a data processing engine with parallel query evaluation for layout-based database retrieval 
+    \item Developed a report generation layer that provides performance insights for businesses 300\% faster than an existing internal solution
+\end{innerlist}
+
+\section{Research}
+\textbf{Graduate Research Assistant, University of Waterloo} \hfill \emph{Aug '18 -- Present}
+\begin{innerlist}
+    \item Worked with Prof. Jimmy Lin from the Data Systems Group on building deep learning models for natual language processing tasks
+\end{innerlist}
+
+\halfblankline
+
+\textbf{Research Intern, University of Waterloo} \hfill \emph{Jan '18 -- May '18}
+\begin{innerlist}
+    \item Worked with the Software Analytics Group and the Computational Health Informatics Lab on hierarchical deep learning models for supervised sentiment analysis on software datasets
+\end{innerlist}
+
+\halfblankline
+
+\textbf{Research Intern, Delft University of Technology} \hfill \emph{Aug '17 -- Dec '17}
+\begin{innerlist}
+    \item Worked with the Software Engineering research group on assessing the reviewability and automating the quality evaluation of pull requests
 \end{innerlist}
 
 \halfblankline
@@ -285,8 +296,9 @@
 
 \section{Teaching}
 
-\textbf{Teaching Assistant, University of Waterloo} \hfill \emph{Sep '17 -- Present} 
+\textbf{Teaching Assistant, University of Waterloo} \hfill \emph{Sep '18 -- Present} 
 \begin{innerlist}
+\item CS 116 - Introduction to Computer Science
 \item CS 135 - Designing Functional Programs
 \end{innerlist}
 
@@ -294,40 +306,40 @@
 
 \textbf{Teaching Assistant, BITS Pilani} \hfill \emph{Jan '17 -- May '17} 
 \begin{innerlist}
-\item BITS F312 - Neural Networks \& Fuzzy Logic 
 \item CS F211 - Data Structures \& Algorithms
+\item BITS F312 - Neural Networks \& Fuzzy Logic 
 \end{innerlist}
 
 \section{Skill Set}
 \textbf{Languages}
 \begin{innerlist}
-    \item[] C, C++, Python, Java, JavaScript, BASH, SQL, HTML, CSS
+    \item[] Python, Java, \CS, SQL, BASH, \LaTeX
 \end{innerlist}
 
 \halfblankline
 
 \textbf{Frameworks}
 \begin{innerlist}
-    \item[] Amazon Web Services, Google Cloud Platform, Firebase, Docker, Scikit-Learn, Numpy, Matplotlib, NLTK, Gensim, Keras, NetworkX, Flask, Scikit-Image, Chart.js 
+    \item[] Hadoop, Spark, PyTorch, Keras, Scikit-Learn, Numpy, NLTK, Gensim, NetworkX, Flask
 \end{innerlist}
 
 \section{Publications}
 
-\href{http://achyudh.xyz/publications/reviewability.pdf}{\textbf{What Makes a Code Change Easier to Review? An Empirical Investigation on Code Change Reviewability} \hfill \emph{2018}}
+\href{http://achyudh.xyz/publications/reviewability.pdf}{\textbf{What Makes a Code Change Easier to Review? An Empirical Investigation on Code Change Reviewability}}
 \begin{innerlist}
-    \item[] \emph{26th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering}
+    \item[] \emph{ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (2018)}
 \end{innerlist}
 
 \halfblankline
 
-\href{http://achyudh.xyz/publications/pyid.pdf}{\textbf{Investigating Type Declaration Mismatches in Python} \hfill \emph{2018}}
+\href{http://achyudh.xyz/publications/pyid.pdf}{\textbf{Investigating Type Declaration Mismatches in Python}}
 \begin{innerlist}
-    \item[] \emph{IEEE Workshop on Machine Learning Techniques for Software Quality Evaluation}
+    \item[] \emph{IEEE Workshop on Machine Learning Techniques for Software Quality Evaluation (2018)}
 \end{innerlist}
 
 \section{Talks}
 
-\textbf{Google Developer Group, Goa}
+\textbf{Google Developer Group, Goa, India}
 \begin{innerlist}
 \item Leveraging the power of Virtualization, Docker and the Cloud \hfill \emph{Apr '17}
 \end{innerlist}
