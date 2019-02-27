@@ -1,350 +1,250 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Don't like 10pt? Try 11pt or 12pt
-\documentclass[10pt]{article}
-
-% The automated optical recognition software used to digitize resume
-% information works best with fonts that do not have serifs. This
-% command uses a sans serif font throughout. Uncomment both lines (or at
-% least the second) to restore a Roman font (i.e., a font with serifs).
-%\usepackage{times}
-%\renewcommand{\familydefault}{\sfdefault}
-
-% This is a helpful package that puts math inside length specifications
-\usepackage{calc}
-\usepackage{comment}
-
-% Simpler bibsection for CV sections
-% (thanks to natbib for inspiration)
-\makeatletter
-\newlength{\bibhang}
-\usepackage[T1]{fontenc}
-\setlength{\bibhang}{1em} %1em}
-\newlength{\bibsep}
- {\@listi \global\bibsep\itemsep \global\advance\bibsep by\parsep}
-\newenvironment{bibsection}%
-        {\begin{enumerate}{}{%
-%        {\begin{list}{}{%
-       \setlength{\leftmargin}{\bibhang}%
-       \setlength{\itemindent}{-\leftmargin}%
-       \setlength{\itemsep}{\bibsep}%
-       \setlength{\parsep}{\z@}%
-        \setlength{\partopsep}{0pt}%
-        \setlength{\topsep}{0pt}}}
-        {\end{enumerate}\vspace{-.6\baselineskip}}
-%        {\end{list}\vspace{-.6\baselineskip}}
-\makeatother
-
-% Layout: Puts the section titles on left side of page
-\reversemarginpar
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Deedy - One Page Two Column Resume
+% LaTeX Template
+% Version 1.2 (16/9/2014)
 %
-%         PAPER SIZE, PAGE NUMBER, AND DOCUMENT LAYOUT NOTES:
+% Original Author:
+% Debarghya Das (http://debarghyadas.com)
 %
-% The next \usepackage line changes the layout for CV style section
-% headings as marginal notes. It also sets up the paper size as either
-% letter or A4. By default, letter was used. If A4 paper is desired,
-% comment out the letterpaper lines and uncomment the a4paper lines.
-%
-% As you can see, the margin widths and section title widths can be
-% easily adjusted.
-%
-% ALSO: Notice that the includefoot option can be commented OUT in order
-% to put the PAGE NUMBER *IN* the bottom margin. This will make the
-% effective text area larger.
-%
-% IF YOU WISH TO REMOVE THE ``of LASTPAGE'' next to each page number,
-% see the note about the +LP and -LP lines below. Comment out the +LP
-% and uncomment the -LP.
-%
-% IF YOU WISH TO REMOVE PAGE NUMBERS, be sure that the includefoot line
-% is uncommented and ALSO uncomment the \pagestyle{empty} a few lines
-% below.
-%
+% Modified By:
+% Achyudh Ram (http://achyudh.xyz)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Use these lines for A4-sized paper
-\usepackage[paper=a4paper,
-            %includefoot, % Uncomment to put page number above margin
-            marginparwidth=30mm,    % Length of section titles
-            marginparsep=1mm,       % Space between titles and text
-            margin=15mm,              % 25mm margins
-            includemp]{geometry}
 
-%% More layout: Get rid of indenting throughout entire document
-\setlength{\parindent}{0in}
-
-\usepackage[shortlabels]{enumitem}
-
-%% Reference the last page in the page number
-%
-% NOTE: comment the +LP line and uncomment the -LP line to have page
-%       numbers without the ``of ##'' last page reference)
-%
-% NOTE: uncomment the \pagestyle{empty} line to get rid of all page
-%       numbers (make sure includefoot is commented out above)
-%
-\usepackage{fancyhdr,lastpage}
+\documentclass[]{Achyudh_Resume}
+\usepackage{fancyhdr}
+ 
 \pagestyle{fancy}
-\pagestyle{empty}      % Uncomment this to get rid of page numbers
-\fancyhf{}\renewcommand{\headrulewidth}{0pt}
-\fancyfootoffset{\marginparsep+\marginparwidth}
-\newlength{\footpageshift}
-\setlength{\footpageshift}
-          {0.5\textwidth+0.5\marginparsep+0.5\marginparwidth-2in}
-\lfoot{\hspace{\footpageshift}%
-       \parbox{4in}{\, \hfill %
-                    \arabic{page} of \protect\pageref*{LastPage} % +LP
-%                    \arabic{page}                               % -LP
-                    \hfill \,}}
+\fancyhf{}
 
-% Finally, give us PDF bookmarks
-\usepackage{color,hyperref}
-\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
-\hypersetup{colorlinks,breaklinks,
-            linkcolor=darkblue,urlcolor=darkblue,
-            anchorcolor=darkblue,citecolor=darkblue}
-
-%%%%%%%%%%%%%%%%%%%%%%%% End Document Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%% Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% The title (name) with a horizontal rule under it
-% (optional argument typesets an object right-justified across from name
-%  as well)
-%
-% Usage: \makeheading{name}
-%        OR
-%        \makeheading[right_object]{name}
-%
-% Place at top of document. It should be the first thing.
-% If ``right_object'' is provided in the square-braced optional
-% argument, it will be right justified on the same line as ``name'' at
-% the top of the CV. For example:
-%
-%       \makeheading[\emph{Curriculum vitae}]{Your Name}
-%
-% will put an emphasized ``Curriculum vitae'' at the top of the document
-% as a title. Likewise, a picture could be included:
-%
-%   \makeheading[\includegraphics[height=1.5in]{my_picutre}]{Your Name}
-%
-% the picture will be flush right across from the name.
-\newcommand{\makeheading}[2][]%
-        {\hspace*{-\marginparsep minus \marginparwidth}%
-         \begin{minipage}[t]{\textwidth+\marginparwidth+\marginparsep}%
-             {\LARGE \bfseries #2 \hfill #1}\\[-0.5\baselineskip]%
-                 \rule{\columnwidth}{1pt}%
-         \end{minipage}}
-
-% The section headings
-%
-% Usage: \section{section name}
-\renewcommand{\section}[1]{\pagebreak[3]%
-    \hyphenpenalty=10000%
-    \vspace{1.3\baselineskip}%
-    \phantomsection\addcontentsline{toc}{section}{#1}%
-    \noindent\llap{\scshape\smash{\parbox[t]{\marginparwidth}{\raggedright #1}}}%
-    \vspace{-\baselineskip}\par}
-    
-\newcommand{\CS}{C\nolinebreak\hspace{-.05em}\raisebox{.6ex}{\tiny\bf \#}}
-
-
-% An itemize-style list with lots of space between items
-\newenvironment{outerlist}[1][\enskip\textbullet]%
-        {\begin{itemize}[#1,leftmargin=*]}{\end{itemize}%
-         \vspace{-.6\baselineskip}}
-
-% An environment IDENTICAL to outerlist that has better pre-list spacing
-% when used as the first thing in a \section
-\newenvironment{lonelist}[1][\enskip\textbullet]%
-        {\begin{list}{#1}{%
-        \setlength{\partopsep}{0pt}%
-        \setlength{\topsep}{0pt}}}
-        {\end{list}\vspace{-.6\baselineskip}}
-
-% An itemize-style list with little space between items
-\newenvironment{innerlist}[1][\enskip\textbullet]%
-        {\begin{itemize}[#1,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
-        {\end{itemize}}
-
-% An environment IDENTICAL to innerlist that has better pre-list spacing
-% when used as the first thing in a \section
-\newenvironment{loneinnerlist}[1][\enskip\textbullet]%
-        {\begin{itemize}[#1,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt]}
-        {\end{itemize}\vspace{-.6\baselineskip}}
-
-% To add some paragraph space between lines.
-% This also tells LaTeX to preferably break a page on one of these gaps
-% if there is a needed pagebreak nearby.
-\newcommand{\blankline}{\quad\pagebreak[3]}
-\newcommand{\halfblankline}{\quad\vspace{-0.5\baselineskip}\pagebreak[3]}
-
-% Uses hyperref to link DOI
-\newcommand\doilink[1]{\href{http://dx.doi.org/#1}{#1}}
-\newcommand\doi[1]{doi:\doilink{#1}}
-
-% For \url{SOME_URL}, links SOME_URL to the url SOME_URL
-\providecommand*\url[1]{\href{#1}{#1}}
-% Same as above, but pretty-prints SOME_URL in teletype fixed-width font
-\renewcommand*\url[1]{\href{#1}{\texttt{#1}}}
-
-% For \email{ADDRESS}, links ADDRESS to the url mailto:ADDRESS
-\providecommand*\email[1]{\href{mailto:#1}{#1}}
-% Same as above, but pretty-prints ADDRESS in teletype fixed-width font
-%\renewcommand*\email[1]{\href{mailto:#1}{\texttt{#1}}}
-
-%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-%    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-%\providecommand\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-%    \TeX}}
-\providecommand\BibTeX{{B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-    \TeX}}
-\providecommand\Matlab{\textsc{Matlab}}
-
-%%%%%%%%%%%%%%%%%%%%%%%% End Helper Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%% Begin CV Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\makeatletter
+\renewcommand\@biblabel[1]{}
+\renewenvironment{thebibliography}[1]
+     {\section*{\refname}%
+      \@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
+      \list{}%
+           {\leftmargin0pt
+            \@openbib@code
+            \usecounter{enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+\makeatother
+ 
 \begin{document}
-{\huge \scshape Achyudh Ram} 
-\vspace{5pt}
-\hrule
-\vspace{5pt}
-\href{http://achyudh.xyz}{http://achyudh.xyz} | 
-\href{https://github.com/achyudhk}{github.com/achyudhk} | \email{arkeshav@uwaterloo.ca} | +1 (226) 898-2242
-\newlength{\rcollength}\setlength{\rcollength}{1.4in}
 
-% NOTE: Mind where the & separators and \\ breaks are in the following
-%       table.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% ALSO: \rcollength is the width of the right column of the table
-%       (adjust it to your liking; default is 1.85in).
+%     TITLE NAME
 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\namesection{ACHYUDH}{RAM}{ \urlstyle{same}\href{http://achyudh.xyz}{http://achyudh.xyz} |
+\href{mailto:arkeshav@uwaterloo.ca}{arkeshav@uwaterloo.ca} | \href{http://github.com/achyudh}{github.com/achyudh} | + 1 (226) 898 2242
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%     COLUMN ONE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Education}
+\begin{minipage}[t]{0.32\textwidth} 
 
-\textbf{University of Waterloo}, Ontario, Canada
-\begin{outerlist}
-\item[] \textbf{M.Math. (Thesis), Computer Science}, \emph{Expected:} August 2020
-        \begin{innerlist}
-		\item Affiliated to the Data Systems Group and the Software Analytics Group
-        \item \emph{GPA: 3.76/4.0}
-        \end{innerlist}
-\end{outerlist}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     SKILLS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\halfblankline
+\section{Skills}
+\subsection{Languages}
+Python \textbullet{} 
+Java \textbullet{}
+C\# \textbullet{} 
+SQL \textbullet{} 
+C \textbullet{} 
+\LaTeX\ \\
+\halfsectionsep
 
-\textbf{Birla Institute of Technology \& Science}, Pilani, India
-\begin{outerlist}
-\item[] \textbf{B.E. (Hons.), Computer Science}, Graduated with \emph{Distinction}
-        \begin{innerlist}
-        \item \emph{GPA: 9.71/10.0 and Major GPA: 9.73/10.0}
-        \end{innerlist}
-        
-\item[] \textbf{M.Sc. (Hons.), Economics}, Graduated with \emph{Distinction}
-        \begin{innerlist}
-        \item \emph{Major GPA: 10.0/10.0}
-        \end{innerlist}
-\end{outerlist}
-   
-   
-    
-\section{Experience}
-\textbf{Software Engineering Intern, Microsoft Research} \hfill \emph{May '18 -- Aug '18}
-\begin{innerlist}
-    \item Worked on query optimization for COSMOS, Microsoft's production Big Data engine
-	\item Performed static analysis on SCOPE queries and evaluated the analysis on production jobs
-\end{innerlist}
+\subsection{Frameworks}
+Hadoop \textbullet{}
+Spark \textbullet{}
+PyTorch \textbullet{} 
+Keras \textbullet{} \\
+Scikit-Learn \textbullet{}
+Numpy \textbullet{}
+NLTK \textbullet{}
+Flask \\
 
-\halfblankline
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %     Projects
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Projects}
+\subsection{Tardis}
+A framework for running ensembles of Seq2Seq Neural Machine Translation models on PySpark using Elephas \\
 
-\textbf{Software Engineering Intern, Intuit} \hfill \emph{May '17 -- Jul '17}
-\begin{innerlist}
-    \item Built a data processing engine with parallel query evaluation for layout-based database retrieval 
-    \item Developed a report generation layer that provides performance insights for businesses 300\% faster than an existing internal solution
-\end{innerlist}
+\subsection{Castor}
+Deep learning models for computational linguistics in PyTorch by the Data Systems Group at the University of Waterloo \\ 
 
-\section{Research}
-\textbf{Graduate Research Assistant, University of Waterloo} \hfill \emph{Aug '18 -- Present}
-\begin{innerlist}
-    \item Worked with Prof. Jimmy Lin from the Data Systems Group on building deep learning models for natual language processing tasks
-\end{innerlist}
+\subsection{Propr}
+Developer feedback and report generation tools for improving the reviewability of pull requests on GitHub \\
 
-\halfblankline
+\subsection{OpenEYE}
+A web app to target misinformation on social issues by visualizing the dichotomy between facts and perceptions on Twitter \\
 
-\textbf{Research Intern, University of Waterloo} \hfill \emph{Jan '18 -- May '18}
-\begin{innerlist}
-    \item Worked with the Software Analytics Group and the Computational Health Informatics Lab on hierarchical deep learning models for supervised sentiment analysis on software datasets
-\end{innerlist}
+\subsection{Foresight}
+An Android app that uses object detection, Google Places API, and Firebase to help the differently-abled navigate better \\
 
-\halfblankline
+% \subsection{DevCAP}
+% An analysis framework to decode the social structure of developer mailing lists, IRC and Slack channels \\
 
-\textbf{Research Intern, Delft University of Technology} \hfill \emph{Aug '17 -- Dec '17}
-\begin{innerlist}
-    \item Worked with the Software Engineering research group on assessing the reviewability and automating the quality evaluation of pull requests
-\end{innerlist}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %     Coursework
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\halfblankline
+% \section{Coursework}
+% \subsection{Graduate}
+% Introduction to Machine Learning \\
+% Neural Networks \& Fuzzy Logic \\
+% Data-Intensive Distributed Computing \\
+% Advanced Topics in AI \\
+% Empirical Software Evolution \\
+% Advanced Topics in Software Engg. \\
+% \halfsectionsep
+% \subsection{Undergraduate}
+% Information Retrieval \\
+% Parallel Computing \\
+% Data Structures \& Algorithms \\
+% Design \& Analysis of Algorithms \\
+% Computer Architecture \\
+% Discrete Structures\\
+% Computer Networks \\
+% Compiler Construction \\
+% Operating Systems \\
+% Logic in Computer Science \\
+% Theory of Computation \\
+% Principles of Programming Languages \\
+% Object Oriented Programming \\
 
-\textbf{Research Intern, Indian Bank} \hfill \emph{May '15 -- Jul '15}
-\begin{innerlist}
-    \item Developed environment sensitive time-series forecasting models for setting business targets
-\end{innerlist}
-
-\section{Teaching}
-
-\textbf{Teaching Assistant, University of Waterloo} \hfill \emph{Sep '18 -- Present} 
-\begin{innerlist}
-\item CS 116 - Introduction to Computer Science
-\item CS 135 - Designing Functional Programs
-\end{innerlist}
-
-\halfblankline
-
-\textbf{Teaching Assistant, BITS Pilani} \hfill \emph{Jan '17 -- May '17} 
-\begin{innerlist}
-\item CS F211 - Data Structures \& Algorithms
-\item BITS F312 - Neural Networks \& Fuzzy Logic 
-\end{innerlist}
-
-\section{Skill Set}
-\textbf{Languages}
-\begin{innerlist}
-    \item[] Python, Java, \CS, SQL, BASH, \LaTeX
-\end{innerlist}
-
-\halfblankline
-
-\textbf{Frameworks}
-\begin{innerlist}
-    \item[] Hadoop, Spark, PyTorch, Keras, Scikit-Learn, Numpy, NLTK, Gensim, NetworkX, Flask
-\end{innerlist}
-
-\section{Publications}
-
-\href{http://achyudh.xyz/publications/reviewability.pdf}{\textbf{What Makes a Code Change Easier to Review? An Empirical Investigation on Code Change Reviewability}}
-\begin{innerlist}
-    \item[] \emph{ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (2018)}
-\end{innerlist}
-
-\halfblankline
-
-\href{http://achyudh.xyz/publications/pyid.pdf}{\textbf{Investigating Type Declaration Mismatches in Python}}
-\begin{innerlist}
-    \item[] \emph{IEEE Workshop on Machine Learning Techniques for Software Quality Evaluation (2018)}
-\end{innerlist}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Talks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Talks}
+\subsection{Google Developer Group}
+\location{Apr 2017 | Goa, India}
+Leveraging the power of Virtualization, Docker and the Cloud \\
 
-\textbf{Google Developer Group, Goa, India}
-\begin{innerlist}
-\item Leveraging the power of Virtualization, Docker and the Cloud \hfill \emph{Apr '17}
-\end{innerlist}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Teaching
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% \section{Teaching} 
+% Introduction to Computer Science \\
+% Designing Functional Programs \\
+% Data Structures \& Algorithms \\
+% Neural Networks \& Fuzzy Logic \\
 
-\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%     COLUMN TWO
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% End Document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{minipage} 
+\hfill
+\begin{minipage}[t]{0.655\textwidth} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     EXPERIENCE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Experience}
+\runsubsection{Microsoft Research}
+\descript{| Software Engineering Intern }
+\location{May 2018 - Aug 2018 | Bangalore, India}
+Worked on query optimization for COSMOS, Microsoft's production Big Data engine, by developing static analysis tools for queries written in SCOPE, a SQL-like declarative language
+\sectionsep
+
+\runsubsection{Intuit}
+\descript{| Software Engineering Intern }
+\location{May 2017 – Jul 2017 | Bangalore, India}
+Developed a data processing engine with parallel query evaluation for layout-based database retrieval and a report generation layer that provides performance insights for businesses 300\% faster than an existing internal solution
+\sectionsep
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     RESEARCH
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Research}
+\runsubsection{University of Waterloo}
+\descript{| Graduate Research Assistant}
+\location{Aug 2018 – Present | Waterloo, Canada}
+Worked with Prof. Jimmy Lin from the \textbf{Data Systems Group} on building deep learning models for natural language processing tasks
+\sectionsep
+
+\runsubsection{University of Waterloo}
+\descript{| Research Intern}
+\location{Jan 2018 – May 2018 | Waterloo, Canada}
+Worked with the \textbf{Software Analytics Group} and the \textbf{Computational Health Informatics Lab} on hierarchical deep learning models for supervised sentiment analysis on software datasets
+\sectionsep
+
+\runsubsection{Delft University of Technology}
+\descript{| Research Intern}
+\location{Aug 2017 – Dec 2017 | Delft, Netherlands}
+Worked with the \textbf{Software Engineering Research Group} on assessing the reviewability and automating the quality evaluation of pull requests
+\sectionsep
+
+\runsubsection{Indian Bank}
+\descript{| Research Intern}
+\location{May 2015 – Jul 2015 | Chennai, India}
+Developed environment sensitive time-series forecasting models for setting business targets for the \textbf{Planning and Economic Research Division}
+\sectionsep
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     EDUCATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Education} 
+
+\runsubsection{University of Waterloo}
+\descript{| Ontario, Canada}
+\vspace{\topsep}
+\begin{tightemize}
+\item[]\locationbf{M.Math. (Thesis) Computer Science}
+Cumulative GPA: 4.0 / 4.0
+\end{tightemize}
+
+\sectionsep
+
+\runsubsection{Birla Institute of Technology and Science}
+\descript{| Pilani, India}
+\begin{tightemize}
+\item[] \locationbf{B.E. (Honors) in Computer Science, Aug 2018}
+Cumulative GPA: 3.88 / 4.0 | Major GPA: 3.89 / 4.0
+\halfsectionsep
+\item[] \locationbf{M.Sc. (Honors) in Economics, Aug 2018}
+Major GPA: 4.0 / 4.0
+\end{tightemize}
+\end{minipage} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     PUBLICATIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Publications}
+\begin{itemize}
+    \item[] What Makes a Code Change Easier to Review? An Empirical Investigation on Code Change Reviewability. In \textit{Proceedings of the 26th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering.} 2018.
+    \item[] Investigating Type Declaration Mismatches in Python. In \textit{IEEE Workshop on Machine Learning Techniques for Software Quality Evaluation.} 2018.
+    \item[] Supervised Sentiment Classification with CNNs for Diverse SE Datasets. \textit{arXiv preprint arXiv:1812.09653.} 2019.
+\end{itemize}
+
+% \renewcommand\refname{\vskip -1.5em}
+% \bibliographystyle{abbrv}
+% \bibliography{Achyudh_Resume}
+% \nocite{*}
+\end{document}  
